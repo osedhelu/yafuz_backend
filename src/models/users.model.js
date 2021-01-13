@@ -20,6 +20,7 @@ class Users {
 		fecha,
 		activado,
 		sfs,
+		usuario
 	) { 
 		
 		this.nombre = nombre == undefined && nombre == null ? '' : nombre;
@@ -39,6 +40,7 @@ class Users {
 		this.fecha = fecha == undefined && fecha == null ? '' : fecha;
 		this.activado = activado == undefined && activado == null ? '' : activado;
 		this.sfs = sfs == undefined && sfs == null ? '' : sfs;
+		this.usuario = usuario == undefined && usuario == null ? '' : usuario;
 		
 	}
 	validate() {
