@@ -24,7 +24,7 @@ const bcrypt = require('bcryptjs')
 						
 						if(bcrypt.compareSync(user.password, data[0].password)){
 
-							return r._200(res, 'entramos')
+							return r._200(res, 'L9cGsC@rGm!HCAd&K44GKR&Cvbdib5xGJfONMZ%WS*kvIzLLv#')
 						} else {
 							
 							return r._400(res, 'usuario incorrecto') 
