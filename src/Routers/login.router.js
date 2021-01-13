@@ -19,12 +19,17 @@ const bcrypt = require('bcryptjs')
 		if(resp) {
 			(async() => {
 				try {
-					let data = await query(`select password from usuarios where email = '${user.email}'`);
+					let data = await query(`select password, usuario from usuarios where email = '${user.email}'`);
 					if(data.length >= 1) {
 						
 						if(bcrypt.compareSync(user.password, data[0].password)){
+							let one = {
+								user: data[0].usuario,
+								email: user.email,
+								token: 'L9cGsC@rGm!HCAd&K44GKR&Cvbdib5xGJfONMZ%WS*kvIzLLv#'
+							}
 
-							return r._200(res, 'L9cGsC@rGm!HCAd&K44GKR&Cvbdib5xGJfONMZ%WS*kvIzLLv#')
+							return r._200(res, one);
 						} else {
 							
 							return r._400(res, 'usuario incorrecto') 
