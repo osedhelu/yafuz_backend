@@ -80,7 +80,7 @@ router.post('/', (req, res) => {
 			'${user.celular}',
 			'${user.usuario}',
 			'${user.password}',
-			'${user.patrocinador}',
+			1,
 			'${user.billetera}',
 			'${user.tipo}',
 			1,
