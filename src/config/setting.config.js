@@ -15,4 +15,4 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
-module.exports = {app}
+module.exports = {app};

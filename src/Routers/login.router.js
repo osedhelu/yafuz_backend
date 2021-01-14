@@ -39,7 +39,7 @@ const bcrypt = require('bcryptjs')
 					}
 				}
 				catch(err) {
-					return r._400(res, err)
+					return r._400(res, [err])
 				}
 			})()
 		}
