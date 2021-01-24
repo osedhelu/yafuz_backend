@@ -14,6 +14,9 @@
     
     // wonpiUrl_test: 'https://sandbox.wompi.co/v1',
     // keyWompi_test: 'pub_test_Dmi9bwpWYXEBVFIqJe0YdYj6BMsYatC0'
+
+    EMAIL_USER: 'peverything2016@gmail.com',
+    EMAIL_PASS: 'peverything2021',
 }
 
 module.exports = {env};
