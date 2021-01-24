@@ -20,6 +20,6 @@ app.use('/e', example);
 app.use('/e/login', login);
 app.use('/e/user', user);
 app.use('/e/paises', paises);
-
+app.use('/e/email', email);
 
 module.exports = {app};
