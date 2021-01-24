@@ -1,4 +1,6 @@
-let templateEmail = (userEmail) => {
+let date = new Date();
+let year = date.getFullYear();
+let templateEmail = (data) => {
     let html = `
 
     <!DOCTYPE html
@@ -154,7 +156,7 @@ let templateEmail = (userEmail) => {
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
                                                     <td class="h1" style="padding: 5px 0 0 0;">
-                                                        P1
+                                                        P1 - Confirmar email
                                                     </td>
                                                 </tr>
                                             </table>
@@ -168,7 +170,7 @@ let templateEmail = (userEmail) => {
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td class="h2">
-                                            
+                                            Hola ${data.name}
                                         </td>
                                     </tr>
                                 </table>
@@ -182,7 +184,7 @@ let templateEmail = (userEmail) => {
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr>
                                                     <td class="bodycopy">
-                                                        Debes confirma tu correo: "${userEmail}" en nuestra plataforma p1 
+                                                        Debes confirma tu correo: "${data.email}" en nuestra plataforma p1 
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -208,11 +210,7 @@ let templateEmail = (userEmail) => {
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                         <td align="center" class="footercopy">
-                                            &reg; P1 <script> let today = new Date(); today.getFullYear() </script><br />
-                                            <a href="#" class="unsubscribe">
-                                                <font color="#ffffff">Unsubscribe</font>
-                                            </a>
-                                            <span class="hide">from this newsletter instantly</span>
+                                            &reg; P1 - ${year} <br />
                                         </td>
                                     </tr>
                                 </table>
