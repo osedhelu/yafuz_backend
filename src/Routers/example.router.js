@@ -1,20 +1,33 @@
 const express = require("express");
 const { r } = require('../config/config');
-const { query } = require('../db/consultar.db');
-
+var Usuario = require('../models/usuarios.model');
 // lt t {SQLConsult} = require('../db/consultar.db.js');
 // const XMLWriter = require("xml-writer");
 
 const router = new express.Router();
 
-router.get('/', (req, res) => {
-	(async() => {
-		try {
-			let data = await query('select * from usuarios');
-			return r._200(res, data);
-		}catch(err) {
-			return r._400(res, err);
-		}
-	})()
+router.get('/:desde', (req, res) => {
+	var desde = req.query.desde || 0;
+    desde = Number(desde);
+
+    Usuario.find({})
+        .skip(desde)
+        .limit(5)
+        .exec(
+            (err, usuarios) => {
+
+                if (err) {
+                  r._400(res, 'Error cargando usuario')
+                }
+
+                Usuario.count({}, (err, conteo) => {
+					r._200(res, {
+                        usuarios: usuarios,
+                        total: conteo})
+
+                })
+
+
+			})
 })
 module.exports = router;
