@@ -1,8 +1,19 @@
 const {app} = require('./rute.config.js');
 const serverHttp = require('http').Server(app)
 let io = require('socket.io')(serverHttp)
-
-  
+const mongoose = require('mongoose');
+const  {env}= require('./env.js');
+//   (() => {
+    
+// mongoose.connect(env.mongodbURL_local, {
+// 	useNewUrlParser: true, 
+// 	useUnifiedTopology: true,
+// 	useCreateIndex: true
+// } , (err) => {
+// 	if (err) throw err;
+// 	console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
+// });
+//   })()
 const message = [];
 
 io.on('connection', (socket) => {

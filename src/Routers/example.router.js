@@ -1,18 +1,16 @@
 const express = require("express");
 const { r } = require('../config/config');
 var Usuario = require('../models/usuarios.model');
-// lt t {SQLConsult} = require('../db/consultar.db.js');
-// const XMLWriter = require("xml-writer");
-
 const router = new express.Router();
 
-router.get('/:desde', (req, res) => {
+router.get('/', (req, res) => {
 	var desde = req.query.desde || 0;
     desde = Number(desde);
 
     Usuario.find({})
         .skip(desde)
-        .limit(5)
+		.limit(5)
+		.populate('paises')		
         .exec(
             (err, usuarios) => {
 
@@ -26,8 +24,6 @@ router.get('/:desde', (req, res) => {
                         total: conteo})
 
                 })
-
-
 			})
 })
 module.exports = router;

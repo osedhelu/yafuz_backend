@@ -1,5 +1,5 @@
 ﻿const env = {
-    PORT: 3000,
+    PORT: 1000,
     LOCALHOST: 'localhost',
     HOST_DB: 'localhost',
     NAME_DB: 'u437562469_yafuz',
@@ -8,7 +8,7 @@
     PORT_DB: 1433,
     SEED_TOKEN: 'esta_es_la_mama_de_las_comtraseñas_lista_para_no_dejar_pasar_a_nafien',
     mongodbURL: 'mongodb://osedhelu:ADMadm12345@osedhelu.ml:27017/yafuzdb',
-    mongodbURL_local: 'mongodb://localhost:27017/yafuz-DB'
+    mongodbURL_local: 'mongodb://localhost:27017/yafuz-DB',
     // APIKEY: '9e86ca80d2834a6096bf9bc5e2066f07',
     // urlAPI: 'https://api.geoapify.com/v1/geocode/reverse?',
     // wonpiUrl_prod: 'https://production.wompi.co/v1',
