@@ -2,7 +2,7 @@ const {app} = require('./rute.config.js');
 const serverHttp = require('http').Server(app)
 let io = require('socket.io')(serverHttp)
 const mongoose = require('mongoose');
-const  {env}= require('./env.js');
+const  {env}= require('../../env');
 //   (() => {
     
 // mongoose.connect(env.mongodbURL_local, {

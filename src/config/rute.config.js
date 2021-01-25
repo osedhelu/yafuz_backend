@@ -1,5 +1,6 @@
-const {env} = require('../config/env.js');
+const {env} = require('../../env');
 const mongoose = require('mongoose');
+let {app} = require('./setting.config');
 
 mongoose.connect(env.mongodbURL_local, {
 	useNewUrlParser: true, 
@@ -8,16 +9,20 @@ mongoose.connect(env.mongodbURL_local, {
 } , (err) => {
 	if (err) throw err;
 	console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
-});
+}); 
   
 
-let {app} = require('./setting.config');
+
+
 const example = require('../Routers/example.router');
 const login = require('../Routers/login.router');
 const user = require('../Routers/users.router');
 const paises = require('../Routers/paises.router');
-const email = require('../Routers/email.router');
 const cajas = require('../Routers/cajas.router');
+const email = require('../Routers/send-email');
+
+
+
 
 	 
 
