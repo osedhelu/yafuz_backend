@@ -1,4 +1,3 @@
-const { r } = require('../config/config');
 const bcryptjs = require('bcryptjs');
 
 
