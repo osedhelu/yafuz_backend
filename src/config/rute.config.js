@@ -2,7 +2,7 @@ const {env} = require('../../env');
 const mongoose = require('mongoose');
 let {app} = require('./setting.config');
 
-mongoose.connect(env.mongodbURL_local, {
+mongoose.connect(env.mongodbURL_local(), {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true,
 	useCreateIndex: true
