@@ -4,7 +4,6 @@ const login = require('../Routers/login.router');
 const user = require('../Routers/users.router');
 const paises = require('../Routers/paises.router');
 const email = require('../Routers/send-email');
-const {env} = require('../config/env.js');
 const mongoose = require('mongoose');
 
 /* mongoose.connect(env.mongodbURL_local, {
