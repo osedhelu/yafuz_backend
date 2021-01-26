@@ -11,17 +11,25 @@ const transporter = nodemailer.createTransport({
 		pass: env.EMAIL_PASS
 	}
 });
-const sendEmail = async(data) => {
-	const mailOptions = {
-		from: "'P1' <example@example.com>",
-		to: data.email,
-		subject: data.subject,
-		html: templateEmail(data),
-	};
-	transporter.sendMail(mailOptions, (error, info) => {
-		const status = err ? new Error : true;
-        return status;
-	});
+const sendEmail = (data = {email: '', subject: '', name: ''}) => {
+(async() => {
+	try {
+		const mailOptions = {
+			from: "'P1' <example@example.com>",
+			to: data.email,
+			subject: data.subject,
+			html: templateEmail(data),
+		};
+		let info = await transporter.sendMail(mailOptions);
+		console.log("Message sent: %s", info.messageId);
+		// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+	  
+		// Preview only available when sending through an Ethereal account
+		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+	} catch (error) {
+		console.log('Erroes al Enviar Email', error) ;
+	}
+})()
 }
 
 module.exports = { sendEmail }

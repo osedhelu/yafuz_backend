@@ -1,0 +1,76 @@
+[{
+	"name": "osedhelu",
+	"referidos": [{
+			"name": "nivel1-1-a",
+			"referidos": [{
+					"name": "nivel2-1-a",
+					"referidos": [{
+							"name": "nivel3-1-a",
+							"referidos": [{
+									"name": "nivel4-1-a",
+									"referidos": []
+								},
+								{
+									"name": "nivel4-1-b",
+									"referidos": []
+								},
+								{
+									"name": "nivel4-1-c",
+									"referidos": []
+								}
+							]
+						},
+						{
+							"name": "nivel3-1-b",
+							"referidos": []
+						},
+						{
+							"name": "nivel3-1-c",
+							"referidos": []
+						}
+					]
+				},
+				{
+					"name": "nivel2-1-b",
+					"referidos": []
+				},
+				{
+					"name": "nivel2-1-c",
+					"referidos": []
+				}
+			]
+		},
+		{
+			"name": "nivel1-2-b",
+			"referidos": [{
+					"name": "nivel2-2-a",
+					"referidos": []
+				},
+				{
+					"name": "nivel2-2-b",
+					"referidos": []
+				},
+				{
+					"name": "nivel2-2-c",
+					"referidos": []
+				}
+			]
+		},
+		{
+			"name": "nivel1-3-c",
+			"referidos": [{
+					"name": "nivel2-3-a",
+					"referidos": []
+				},
+				{
+					"name": "nivel2-3-b",
+					"referidos": []
+				},
+				{
+					"name": "nivel2-3-c",
+					"referidos": []
+				}
+			]
+		}
+	]
+}]
