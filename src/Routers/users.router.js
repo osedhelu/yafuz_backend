@@ -1,114 +1,96 @@
 const express = require("express");
-const { r, validator } = require('../config/config');
+const { r } = require('../config/config');
+const { validate_pass } = require('../function/validaciones.fn');
+const { sendEmail } = require('../function/send-email.fn');
+const { createCajas } = require('../function/createCajas.ng');
 const { query } = require('../db/consultar.db');
-let  {Users} = require('../models/users.model');
+let Usuario = require('../models/usuarios.model');
 // const XMLWriter = require("xml-writer");
 
 const router = new express.Router();
 
 router.get('/', (req, res) => {
-	(async() => {
-		try {
-			const rows = await query("select * from usuarios")
-			return r._200(res, rows);
-		} catch(err) {
-			return r._400(res, err);
-		}
-	})();
+	Usuario.find({}, 'role nombre apellidos email')
+		.exec(
+			(err, resp) => {
+				if (err) {
+					return r._500(res, { message: 'Error al cargar los usuario' })
+				} else {
+					return r._200(res, resp)
+
+				}
+			})
 
 })
 
 
 router.post('/', (req, res) => {
-	let body = new Users;
 	body = req.body;
-	
-	let user = new Users(null,
-		validator('string', body.nombre),
-		validator('string', body.apellidos),
-		validator('string', body.pais),
-		validator('email', body.email),
-		validator('number',body.celular),
-		validator('password', body.password,{ compare: body.password_compare} ),
-		body.patrocinador,
-		body.billetera,
-		body.tipo,
-		body.estadojuego,
-		body.estado,
-		body.empresa,
-		body.subid,
-		body.fechayhora,
-		body.fecha,
-		body.activadom,
-		body.sfs,
-		body.usuario
-		)
-		user.validate().then(resp => {
-			if(resp) {
-				var timestamp = 1293683278;
-		var date = new Date(timestamp * 1000);
-		var year = date.getFullYear();
-		var month = date.getMonth() + 1;
-		var day = date.getDate();
-		var hours = date.getHours();
-		var minutes = date.getMinutes();
-		var seconds = date.getSeconds();
-		let aa = `INSERT INTO usuarios (nombre
-			, apellidos
-			, pais
-			, email
-			, celular
-			, usuario
-			, password
-			, patrocinador
-			, billetera
-			, tipo
-			,estadojuego
-			,estado
-			,empresa
-			,subid
-			,fechayhora
-			,fecha
-			,activado,
-			sfs
-			)
-			VALUES (
-			'${user.nombre}',
-			'${user.apellidos}',
-			'${user.pais}',
-			'${user.email}',
-			'${user.celular}',
-			'${user.usuario}',
-			'${user.password}',
-			1,
-			'${user.billetera}',
-			'${user.tipo}',
-			1,
-			1,
-			1,
-			1,
-			'${year}-${month}-${day} ${hours}:${minutes}:${seconds}',
-			'${year}-${month}-${day}',
-			16,
-			0
-			);`
-			aa.toString();
-	(async() => {
-		try{
-			let data = await query(aa);
-			r._200(res, data)
-		}catch(err) {
-			
-			r._400(res, err.sqlMessage);
-		}
-	})();
-			}
+	let user = new Usuario({
+		nombre: body.nombre,
+		apellidos: body.apellidos,
+		pais: body.pais,
+		email: body.email,
+		celular: body.celular,
+		password: body.password,
+		patrocinador: body.patrocinador,
+		billetera: body.billetera,
+		role: body.role,
+		estadojuego: body.estadojuego,
+		estado: body.estado,
+		empresa: body.empresa,
+		subid: body.subid
+	})
+	validate_pass(body.password, body.password_compare)
+		.then(valid_password => {
+			user.password = valid_password;
+			user.save((err, resp) => {
+				if (err) {
+					return r._400(res, err);
+				} else {
+					sendEmail({ email: resp.email, subject: 'Confimacion de correo', name: `${resp.nombre} ${resp.apellidos}` })
+					createCajas(resp._id)
+					return r._201(res, resp)
+				}
+			})
 		}).catch(err => {
-			return r._400(res, err)
+			r._400(res, err);
 		})
 
-		
 })
-	
+
+
+router.put('/:id', (req, res) => {
+	let id = req.params.id;
+	Usuario.findById(id, (err, resp) => {
+		if (err) {
+			return r._500(res, { message: 'erroe en el servidor', err });
+		}
+		else if (!resp) {
+			return r._400(res, { message: 'Error al Busacar Usuarios' });
+		}
+		else {
+			let body = req.body;
+			let time = new Date();
+			resp.apellidos = body.apellidos;
+			resp.pais = body.pais;
+			resp.celular = body.celular;
+			resp.patrocinador = body.patrocinador;
+			resp.fechayhora = time; 
+			resp.fecha = time;
+			resp.role = 'EMPRESA';
+
+			resp.save((err, resp) => {
+				if (err) {
+					return r._400(res, err);
+				} else {
+					// sendEmail({ email: resp.email, subject: 'Confimacion de correo', name: `${resp.nombre} ${resp.apellidos}` })
+					return r._201(res, resp)
+				}
+			})
+		}
+	})
+})
+
 
 module.exports = router;

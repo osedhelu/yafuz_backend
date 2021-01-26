@@ -13,9 +13,22 @@ let r = {
             data
         })
     },
+    
+    _201: (res, data) => {
+        return res.status(201).json({
+            ok: true,
+            data
+        })
+    },
     _401: (res, error) => {
         return res.status(401).json({
-            ok: true,
+            ok: false,
+            error
+        })
+    },
+    _500: (res, error) => {
+        return res.status(500).json({
+            ok: false,
             error
         })
     },
