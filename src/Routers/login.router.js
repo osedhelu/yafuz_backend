@@ -1,52 +1,30 @@
 const express = require("express");
-const { r, validator } = require('../config/config');
-const { query, conn } = require('../db/consultar.db');
-const {Users} = require('../models/users.model');
+const { r } = require('../config/config');
+const { generarToken } = require('../function/validateToken.fn');
+const Users = require('../models/usuarios.model');
 const router = new express.Router();
 const bcrypt = require('bcryptjs')
  router.post('/', (req, res) => {
 	let body = req.body;
-	let user = new Users(
-		'',
-		'',
-		'',
-		'',
-		validator('email', body.email),
-		'',
-		body.password
-	);
-	user.validate().then(resp => {
-		if(resp) {
-			(async() => {
-				try {
-					let data = await query(`select password, usuario from usuarios where email = '${user.email}'`);
-					if(data.length >= 1) {
-						
-						if(bcrypt.compareSync(user.password, data[0].password)){
-							let one = {
-								user: data[0].usuario,
-								email: user.email,
-								token: 'L9cGsC@rGm!HCAd&K44GKR&Cvbdib5xGJfONMZ%WS*kvIzLLv#'
-							}
-
-							return r._200(res, one);
-						} else {
-							
-							return r._400(res, 'usuario incorrecto') 
-						}
-					}else {
-						r._400(res, 'usuario incorrecto')
-					}
-				}
-				catch(err) {
-					return r._400(res, err)
-				}
-			})()
+	Users.findOne({email: body.email}, (err, usuario) => {
+		if(err) {
+			return r._500(res, {message: 'Error al buscar el usuario'})
 		}
-	}).catch(err => {
-		return r._400(res, err)
-	})
+		else if(!usuario) {
+			return r._400(res, {message: 'Credenciales incorrectas -- email'})
+		}
+		if(!bcrypt.compareSync(body.password, usuario.password)){
+			return r._400(res, {message: 'Credenciales incorrectas -- password'})
+		}
+		if(usuario.activado == '0') {
+			return r._400(res, {message: 'Este usuario no esta activo', action: `revisé su correo ${usuario.email}`})
 
+		}
+		else {
+			usuario.password = '';
+			return r._200(res, usuario)
+		}
+	})
 });
 
 

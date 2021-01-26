@@ -20,6 +20,7 @@ const user = require('../Routers/users.router');
 const paises = require('../Routers/paises.router');
 const cajas = require('../Routers/cajas.router');
 const email = require('../Routers/send-email');
+const activate = require('../Routers/activate.router');
 
 
 
@@ -32,5 +33,6 @@ app.use('/e/user', user);
 app.use('/e/paises', paises);
 app.use('/e/email', email);
 app.use('/e/cajas', cajas);
+app.use('/e/activate', activate);
 
 module.exports = {app};
