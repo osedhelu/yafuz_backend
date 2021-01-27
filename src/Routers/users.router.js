@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
 						name: `${resp.nombre} ${resp.apellidos}`, 
 						token: token })
 					createCajas(resp._id)
-					return r._201(res, resp)
+					return r._201(res, 'Revisé su correo')
 				}
 			})
 		}).catch(err => {

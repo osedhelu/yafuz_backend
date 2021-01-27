@@ -21,7 +21,7 @@ var usuarioSchema = new Schema({
         default: null
     },
     email: { type: String, unique: true, required: [true, 'El correo es necesario'] },
-    celular: { type: Number, required: [true, 'El nombre es necesario'] },
+    celular: { type: String, required: [true, 'El nombre es necesario'] },
     password: { type: String, required: [true, 'La contraseña es necesaria'] }, 
     patrocinador: {
         type: Schema.Types.ObjectId,

@@ -1,5 +1,6 @@
 const express = require("express");
 const { r } = require('../config/config');
+const { verifyToken } = require('../middleware/authorizer');
 const { generarToken } = require('../function/validateToken.fn');
 const Users = require('../models/usuarios.model');
 const router = new express.Router();
@@ -22,11 +23,14 @@ const bcrypt = require('bcryptjs')
 		}
 		else {
 			usuario.password = '';
-			return r._200(res, usuario)
+			return r._200(res, generarToken(usuario))
 		}
 	})
 });
 
+router.get('/', verifyToken, (req, res) => {
+	r._200(res,req.my_data)
+})
 
 
 module.exports = router;
