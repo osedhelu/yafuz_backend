@@ -11,14 +11,14 @@ const transporter = nodemailer.createTransport({
 		pass: env.EMAIL_PASS
 	}
 });
-const sendEmail = (data = {email: '', subject: '', name: ''}) => {
+const sendEmail = (data = {email: '', subject: '', name: '', token: ''}) => {
 (async() => {
 	try {
 		const mailOptions = {
 			from: "'P1' <example@example.com>",
 			to: data.email,
 			subject: data.subject,
-			html: templateEmail(data),
+			html: templateEmail({name: data.name, email: data.email, token: data.token}),
 		};
 		let info = await transporter.sendMail(mailOptions);
 		console.log("Message sent: %s", info.messageId);
