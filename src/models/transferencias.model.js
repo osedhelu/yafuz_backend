@@ -13,7 +13,6 @@ const TrasferenciaSchemas = new Schema({
         required: [true, 'debe asociar un usuario a este registro']
     },
     cantidad: { type: Number, required: true },
-    cantidad: { type: Number, required: true },
     btc: { type: Date, required: true },
     rate: { type: String, required: true },
     fechayhora: { type: Date, required: true },

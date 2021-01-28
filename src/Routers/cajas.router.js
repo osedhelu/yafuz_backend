@@ -3,18 +3,23 @@ const { r } = require('../config/config');
 var Cajas = require('../models/cajas.model');
 const { createCajas } = require('../function/createCajas.ng');
 const SchemaCajas = require('../models/cajas.model'); 
-
-
+const {verifyToken} = require('../middleware/authorizer.js');
 // lt t {SQLConsult} = require('../db/consultar.db.js');
 // const XMLWriter = require("xml-writer");
 
 const router = new express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/', verifyToken ,(req, res) => {
+    let usuario = req.my_data.User;
     let id = req.params.id;
-	var desde = req.query.desde || 0;
-    desde = Number(desde);
-    Cajas.find({'usuario' : id })	
+    // console.log(usuario);
+  var limite = req.query.limit || 0;
+  var pagine = req.query.page || 0;
+  pagine = Number(pagine);
+  limite = Number(limite);
+    Cajas.find({'usuario' : usuario._id })
+    .limit(limite)
+    .skip(pagine)
         .exec(
             (err, cajas) => {
 
@@ -22,7 +27,7 @@ router.get('/:id', (req, res) => {
                   r._500(res, 'Error cargando usuario', err)
                 }
 
-                Cajas.count({}, (err, conteo) => {
+                Cajas.count({'usuario' : usuario._id }, (err, conteo) => {
 					r._200(res, {
                         cajas,
                         total: conteo})
