@@ -10,7 +10,7 @@ return [
     valor : 5,
     fecha : fecha,
     estado : false,
-    activo : false,
+    activo : true,
     name : 'CAJA PARTICIPANTE'
 }
 ,

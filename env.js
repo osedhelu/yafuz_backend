@@ -10,8 +10,7 @@
     mongodbURL_local: function() {
         return `mongodb://${this.USER_DB}:${this.USER_PASSWORD}@${this.HOST_DB}:${this.PORT_DB}/${this.DB_NAME}?authSource=admin&readPreference=primary&gssapiServiceName=mongodb&appname=MongoDB%20Compass&ssl=false`
     },
-        
-    url_email: 'http://osedhelu.ml/e/activate',
+    url_email: 'http://osedhelu.ml/e',
     app_url: 'http://osedhelu.ml/#/login',
     EMAIL_USER: 'peverything2016@gmail.com',
     EMAIL_PASS: 'peverything2021',

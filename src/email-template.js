@@ -194,8 +194,8 @@ let templateEmail = (data = {name: '', email: '', token: '' }) => {
                                                         <tr>
                                                             <td class="button" height="45">
                                                                 <a target="_blank" 
-                                                                data-saferedirecturl="https://www.google.com/url?q=${env.url_email}/${data.token}/${data.email}&source=gmail&ust=1611768321714000&usg=AFQjCNGNnsrYcN_c1Na6P3nuLsLXM8mKUw" 
-                                                                href="${env.url_email}/${data.token}/${data.email}">Confirmar correo</a>
+                                                                data-saferedirecturl="https://www.google.com/url?q=${env.url_email}/activate/?token=${data.token}&source=gmail&ust=1611768321714000&usg=AFQjCNGNnsrYcN_c1Na6P3nuLsLXM8mKUw" 
+                                                                href="${env.url_email}/activate/?token=${data.token}">Confirmar correo</a>
                                                             </td>
                                                         </tr>
                                                     </table>

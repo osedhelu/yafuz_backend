@@ -14,9 +14,8 @@ router.post('/', (req, res) => {
     console.log(token, '    ', email);
     res.redirect(env.app_url)
 })
-router.get('/:token/:email', (req, res) => {
-    let token = req.params.token;
-    let email = req.params.email;
+router.get('/', (req, res) => {
+    let token = req.query.token;
     verifyToken(token).then(resp => {
         console.log(resp.User._id);
         Usuario.findById(resp.User._id, (err, usuario) => {
@@ -35,10 +34,10 @@ router.get('/:token/:email', (req, res) => {
                                 return r._500(res, { messages: 'Error en el servicio', err })
                             }
                         })
-                        res.redirect(env.url_frontend)
+                        res.redirect(env.app_url)
                     }
                     else {
-                        res.redirect(env.url_frontend)
+                        res.redirect(env.app_url)
                         
                     }
                     console.log(totalCajas.length);
