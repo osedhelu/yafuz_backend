@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
     let token = req.body.token;
     let email = req.body.email;
     console.log(token, '    ', email);
-    res.redirect('http://localhost:4200')
+    res.redirect(env.app_url)
 })
 router.get('/:token/:email', (req, res) => {
     let token = req.params.token;
