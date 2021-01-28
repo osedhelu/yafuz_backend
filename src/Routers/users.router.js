@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
 						expiresIn: 10080
 					})
 					sendEmail({ 
-						email: 'osedhelu@gmail.com', 
+						email: resp.email, 
 						subject: 'Confimacion de correo', 
 						name: `${resp.nombre} ${resp.apellidos}`, 
 						token: token })

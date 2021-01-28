@@ -12,7 +12,7 @@
     },
         
  
-
+    app_url: 'http://osedhelu.ml/#/login',
     EMAIL_USER: 'peverything2016@gmail.com',
     EMAIL_PASS: 'peverything2021',
 }
