@@ -19,6 +19,7 @@ router.get('/', verifyToken ,(req, res) => {
   limite = Number(limite);
     Cajas.find({'usuario' : usuario._id })
     .limit(limite)
+    .sort({nivel: 1})
     .skip(pagine)
         .exec(
             (err, cajas) => {
