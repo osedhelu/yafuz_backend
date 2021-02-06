@@ -15,23 +15,16 @@ var usuarioSchema = new Schema({
     nombre: { type: String, required: [true, 'El nombre es necesario'] },
     apellidos: { type: String, required: [true, 'El nombre es necesario'] },
 	pais: {
-        type: Schema.Types.ObjectId,
-        ref: 'paises',
-        required: true, 
-        default: null
+        type: Schema.Types.ObjectId, ref: 'paises' 
     },
     email: { type: String, unique: true, required: [true, 'El correo es necesario'] },
     celular: { type: String, required: [true, 'El nombre es necesario'] },
     password: { type: String, required: [true, 'La contraseña es necesaria'] }, 
-    patrocinador: {
-        type: Schema.Types.ObjectId,
-        ref: 'usuarios',
-        default: '600f7839bf51c32a70fd1b0c'
-    },
+    patrocinador: { type: String, required: false },
     billetera: { type: String, required: false },
     role: { type: String, required: true, default: 'USUARIO', enum: rolesValidos },
     estadojuego: { type: String, required: true,  default: '1' },
-    estado: { type: String, required: true, default: '0' },
+    estado: { type: Boolean, required: true, default: false },
     empresa: { type: String, required: true, default: '1'  },
     subid: { type: String, required: true, default: '0'  },
     fechayhora: { type: Date, required: false },

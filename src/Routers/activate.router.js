@@ -5,7 +5,7 @@ const { verifyToken } = require('../function/validateToken.fn');
 const { createCajas } = require('../function/createCajas.ng');
 const SchemaCajas = require('../models/cajas.model');
 var Usuario = require('../models/usuarios.model');
-
+const {getUsuario} = require('../function/user.fn');
 const router = new express.Router();
 
 router.post('/', (req, res) => {
@@ -14,12 +14,18 @@ router.post('/', (req, res) => {
     console.log(token, '    ', email);
     res.redirect(env.app_url)
 })
-router.get('/', (req, res) => {
+router.get('/',  (req, res) => {
     let token = req.query.token;
     verifyToken(token).then(resp => {
         console.log(resp.User._id);
-        Usuario.findById(resp.User._id, (err, usuario) => {
-            usuario.activado = '1'
+        Usuario.findById(resp.User._id, async(err, usuario) => {
+            if(usuario.email == 'osedhelu@gmail.com'){
+                usuario.role = 'EMPRESA'; 
+            }
+            if(usuario.patrocinador == 'nuevo'){
+                usuario.patrocinador = await getUsuario()
+            }
+            usuario.activado = true;
             usuario.save()
         })
         SchemaCajas.find({ usuario: resp.User._id })

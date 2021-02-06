@@ -6,17 +6,25 @@ const { createCajas } = require('../function/createCajas.ng');
 const { query } = require('../db/consultar.db');
 let Usuario = require('../models/usuarios.model');
 const jwt = require('jsonwebtoken');
-
+const {usuariosCajas} = require('../function/user.fn');
 const {env} = require('../../env.js');
 // const XMLWriter = require("xml-writer");
 
 const router = new express.Router();
 
 router.get('/', (req, res) => {
-	Usuario.find({}, 'role nombre apellidos email activado')
-		.exec(
+	var populate = { 
+		path: 'usuarios',
+		select: 'patrocinador'
+    }
+	Usuario.find({}, 'role nombre apellidos email activado pais patrocinador')
+	.populate('pais', 'nombre phone_code')
+	.populate(populate)
+	// .sort('patrocinador')
+	.exec(
 			(err, resp) => {
 				if (err) {
+					console.log(err);
 					return r._500(res, { message: 'Error al cargar los usuario' })
 				} else {
 					return r._200(res, resp)
@@ -44,26 +52,29 @@ router.post('/', (req, res) => {
 		empresa: body.empresa,
 		subid: body.subid
 	})
-	console.log(user);
 	validate_pass(body.password, body.password_compare)
 		.then(valid_password => {
+			console.log(body.patrocinador == 'nuevo');
+			user.patrocinador = body.patrocinador;
+			// user.active = true;
 			user.password = valid_password;
 			user.save((err, resp) => {
 				if (err) {
 					return r._400(res, err);
 				} else {
-					let token = jwt.sign({
-						User: resp
-					}, env.SEED_TOKEN, {
-						expiresIn: 10080
+					let token = jwt.sign({id: resp._id}, env.SEED_TOKEN, {
+						expiresIn: 50080
 					})
-					sendEmail({ 
-						email: resp.email, 
-						subject: 'Confimacion de correo', 
-						name: `${resp.nombre} ${resp.apellidos}`, 
-						token: token })
-					createCajas(resp._id)
-					return r._201(res, 'Revisé su correo')
+					
+					// sendEmail({ 
+					// 	email: resp.email, 
+					// 	subject: 'Confimacion de correo', 
+					// 	name: `${resp.nombre} ${resp.apellidos}`, 
+					// 	token: token })
+					// 	console.log(token);
+					// createCajas(resp._id)
+					usuariosCajas(token) //-> prueba
+					return r._201(res, token)
 				}
 			})
 		}).catch(err => {

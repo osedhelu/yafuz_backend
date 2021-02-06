@@ -9,13 +9,16 @@ const transporter = nodemailer.createTransport({
 	auth: {
 		user: env.EMAIL_USER,
 		pass: env.EMAIL_PASS
+	},
+	tls: {
+		rejectUnauthorized: false
 	}
 });
 const sendEmail = (data = {email: '', subject: '', name: '', token: ''}) => {
 (async() => {
 	try {
 		const mailOptions = {
-			from: "'P1' <example@example.com>",
+			from: `'My email' <${env.EMAIL_USER}>`,
 			to: data.email,
 			subject: data.subject,
 			html: templateEmail({name: data.name, email: data.email, token: data.token}),

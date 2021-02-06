@@ -1,10 +1,8 @@
 const express = require("express");
 const { r } = require('../config/config');
 var Cajas = require('../models/cajas.model');
-const { createCajas } = require('../function/createCajas.ng');
-const SchemaCajas = require('../models/cajas.model'); 
+const { usuariosCajas } = require('../function/user.fn');
 const {verifyToken} = require('../middleware/authorizer.js');
-// lt t {SQLConsult} = require('../db/consultar.db.js');
 // const XMLWriter = require("xml-writer");
 
 const router = new express.Router();
@@ -13,13 +11,14 @@ router.get('/', verifyToken ,(req, res) => {
     let usuario = req.my_data.User;
     let id = req.params.id;
     // console.log(usuario);
-  var limite = req.query.limit || 0;
-  var pagine = req.query.page || 0;
-  pagine = Number(pagine);
+  let limite = req.query.limit || 6;
+  let pagine = req.query.page || 1;
+  pagine = Number(limite * pagine);
   limite = Number(limite);
     Cajas.find({'usuario' : usuario._id })
+    .sort({position:1})
+    .skip(pagine) 
     .limit(limite)
-    .skip(pagine)
         .exec(
             (err, cajas) => {
 
@@ -35,14 +34,9 @@ router.get('/', verifyToken ,(req, res) => {
                 })
 			})
 })
-router.post('/:id', (req, res) => {
-  let id = req.params.id;
-  
-	SchemaCajas.create(createCajas(id), (err, resp) => {
-    if(err) {
-      return r._500(res, {messages: 'Error en el servicio', err})
-    }
-    return r._200(res, resp)
-  });
+router.post('/:token', (req, res) => {
+  let token = req.params.token;
+ let aa = usuariosCajas(token);
+  r._200(res, aa)
 })
 module.exports = router;

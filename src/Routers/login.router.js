@@ -17,7 +17,7 @@ const bcrypt = require('bcryptjs')
 		if(!bcrypt.compareSync(body.password, usuario.password)){
 			return r._400(res, {message: 'Credenciales incorrectas -- password'})
 		}
-		if(usuario.activado == '0') {
+		if(!usuario.estado) {
 			return r._400(res, {message: 'Este usuario no esta activo', action: `revisé su correo ${usuario.email}`})
 
 		}
