@@ -11,10 +11,10 @@
         return `mongodb://${this.USER_DB}:${this.USER_PASSWORD}@${this.HOST_DB}:${this.PORT_DB}/${this.DB_NAME}?authSource=admin&readPreference=primary&gssapiServiceName=mongodb&appname=MongoDB%20Compass&ssl=false`
         // return `mongodb://localhost:27017/yafuz-DB`;
     },
-    // url_email: 'http://osedhelu.ml/e',
-    // app_url: 'http://osedhelu.ml/#/login',
-    url_email: 'http://localhost:3000/e',
-    app_url: 'http://localhost:4200/#/login',
+    url_email: 'http://osedhelu.ml/e',
+    app_url: 'http://osedhelu.ml/#/login',
+    // url_email: 'http://localhost:3000/e',
+    // app_url: 'http://localhost:4200/#/login',
     EMAIL_USER: 'peverything2016@gmail.com',
     EMAIL_PASS: 'peverything2021',
 }
