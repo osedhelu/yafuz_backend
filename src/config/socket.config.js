@@ -16,12 +16,14 @@ const  {env}= require('../../env');
 //   })()
 const message = [];
 
-io.on('connection', (socket) => {
-  console.log("cone", socket.id)
-  socket.on('disconnect', () => {
-    console.log('user disconnected', socket.id);
+io.on('connection', (client) => {
+  socket.on('disconect', (q) => {
+
+	
+    console.log('user disconnected', q);
   });
   socket.on('send-message', (data) => {
+	  console.log('conectado', socket.id);
     message.push(data)
     socket.emit('text-event', message)
     socket.broadcast.emit('text-event', message)

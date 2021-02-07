@@ -11,6 +11,7 @@ let getUsuario = () => {
 				if (err) {
 					reject(err)
 				} else {
+					
 					resolve(resp[0]._id)
 				}
 			})
@@ -41,11 +42,14 @@ let totalCajas = (idUser) =>  {
 		.exec()
 		.then(async(usuario) => {
 			if(usuario.email == 'osedhelu@gmail.com'){
-                usuario.role = 'EMPRESA'; 
-            }
-            if(usuario.patrocinador == 'nuevo'){
-                usuario.patrocinador = await getUsuario()
-            }
+                usuario.role = 'EMPRESA';
+				usuario.patrocinador = 'admin' 
+            }else {
+				if(usuario.patrocinador == 'nuevo'){
+					usuario.patrocinador = await getUsuario()
+				}
+			}
+            
             usuario.estado = true;
             usuario.save()
 			resolve(usuario)
@@ -83,9 +87,9 @@ let usuariosCajas = (token) => {
 			
 			let aa = await totalUsuarios(id);
 			let lengthCajas = await totalCajas(id);
-			console.log(aa);
-			return await cargar16caja(lengthCajas, id)
-
+			let bb = await cargar16caja(lengthCajas, id)
+			console.log('aa', aa);
+			console.log('bb', bb);
 		}catch(err) {
 			console.log(err);
 		}
