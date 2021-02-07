@@ -22,11 +22,11 @@ io.on('connection', (client) => {
 	
     console.log('user disconnected', q);
   });
-  socket.on('send-message', (data) => {
-	  console.log('conectado', socket.id);
+  client.on('send-message', (data) => {
+	  console.log('conectado', client.id);
     message.push(data)
-    socket.emit('text-event', message)
-    socket.broadcast.emit('text-event', message)
+    client.emit('text-event', message)
+    client.broadcast.emit('text-event', message)
   })
 })
 app.locals.io = io
