@@ -97,4 +97,18 @@ let usuariosCajas = (token) => {
 }
 
 
-module.exports = { getUsuario, usuariosCajas }
+let getReferidos = (id) => {
+	return new Promise((resolve, reject) => {
+		userModel.find({patrocinador: id})
+		.exec()
+		.then(resp => {
+		resolve(resp)
+		})
+		.catch(err => {
+			reject(err)	
+		})
+	});
+}
+
+
+module.exports = { getUsuario, usuariosCajas, getReferidos }

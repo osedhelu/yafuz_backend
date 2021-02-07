@@ -1,17 +1,5 @@
-const {env} = require('../../env');
-const mongoose = require('mongoose');
 let {app} = require('./setting.config');
-
-mongoose.connect(env.mongodbURL_local(), {
-	useNewUrlParser: true, 
-	useUnifiedTopology: true,
-	useCreateIndex: true
-} , (err) => {
-	if (err) throw err;
-	console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
-}); 
   
-
 
 
 const example = require('../Routers/example.router');
@@ -22,6 +10,7 @@ const cajas = require('../Routers/cajas.router');
 const email = require('../Routers/send-email');
 const activate = require('../Routers/activate.router');
 
+const referidos = require('../Routers/referidos.router');
 
 
 
@@ -34,5 +23,7 @@ app.use('/e/paises', paises);
 app.use('/e/email', email);
 app.use('/e/cajas', cajas);
 app.use('/e/activate', activate);
+app.use('/e/activate', referidos);
+app.use('/e/referidos', referidos);
 
 module.exports = {app};
