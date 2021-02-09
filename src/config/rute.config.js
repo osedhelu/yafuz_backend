@@ -11,6 +11,7 @@ const email = require('../Routers/send-email');
 const activate = require('../Routers/activate.router');
 
 const referidos = require('../Routers/referidos.router');
+const socket = require('../Routers/socket.router');
 
 
 
@@ -25,5 +26,8 @@ app.use('/e/cajas', cajas);
 app.use('/e/activate', activate);
 app.use('/e/activate', referidos);
 app.use('/e/referidos', referidos);
+app.use('/e/socket', socket)
+
+
 
 module.exports = {app};
