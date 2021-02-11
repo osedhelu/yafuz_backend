@@ -1,27 +1,12 @@
 
 
-let listToTree = (data, options) => {
-    //  var map = {}, node, roots = [], i;
-    //     for (i = 0; i < list.length; i += 1) {
-    //         map[list[i].id] = i; // initialize the map
-    //         list[i].children = []; // initialize the children
-    //     }
-    //     for (i = 0; i < list.length; i += 1) {
-    //         node = list[i];
-    //         if (node.parentId !== "0") {
-    //             // if you have dangling branches check that map[node.parentId] exists
-    //             list[map[node.parentId]].children.push(node);
-    //         } else {
-    //             roots.push(node);
-    //         }
-    //     }
-    //     return roots;
-    options = options || {};
-    var ID_KEY = options.idKey || 'id';
-    var PARENT_KEY = options.parentKey || 'parent';
-    var CHILDREN_KEY = options.childrenKey || 'children';
+let listToTree = ({data, idKey, parentKey,childrenKey}) => {
+    
+    var ID_KEY = idKey || 'id';
+    var PARENT_KEY = parentKey || 'parent';
+    var CHILDREN_KEY = childrenKey || 'children';
 
-    var item, id, parentId;
+    // var item, id, parentId;
     var map = {};
     for (var i = 0; i < data.length; i++) { // make cache
         if (data[i][ID_KEY]) {
@@ -41,5 +26,9 @@ let listToTree = (data, options) => {
             }
         }
     };
+    console.log(data)
     return data;
 }
+
+
+module.exports = {listToTree};
