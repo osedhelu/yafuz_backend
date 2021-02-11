@@ -13,6 +13,6 @@ app.use(function(req, res, next) {
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use('/e', express.static('public'));
+// app.use('/', express.static('public'));
 
 module.exports = {app};

@@ -8,6 +8,8 @@ let Usuario = require('../models/usuarios.model');
 const jwt = require('jsonwebtoken');
 const {usuariosCajas} = require('../function/user.fn');
 const {env} = require('../../env.js');
+let {listToTree} = require('../function/treeList.fn')
+
 // const XMLWriter = require("xml-writer");
 
 const router = new express.Router();
@@ -18,20 +20,20 @@ router.get('/', (req, res) => {
 		select: 'patrocinador'
     }
 	Usuario.find({}, 'role nombre apellidos email activado pais patrocinador')
-	.populate('pais', 'nombre phone_code')
+	.populate('pais', 'nombre phone_code iso2')
 	.populate(populate)
 	// .sort('patrocinador')
 	.exec(
-			(err, resp) => {
-				if (err) {
-					console.log(err);
-					return r._500(res, { message: 'Error al cargar los usuario' })
-				} else {
-					return r._200(res, resp)
-
-				}
-			})
-
+		(err, usuarios) => {
+			if (err) {
+			  r._400(res, 'Error cargando usuario')
+			}
+			let bb = JSON.stringify(usuarios)
+			let cc = JSON.parse(bb)
+			   console.log(cc);
+			   let dd = listToTree({data:cc, parentKey: 'patrocinador', idKey: '_id', childrenKey: 'relacion'})
+			return r._200(res, dd)
+		})
 })
 
 
