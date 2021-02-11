@@ -1,7 +1,7 @@
 
 let express = require("express");
 let app = express();
-
+var path = require('path');
 const bodyParser = require('body-parser')
 
 app.use(function(req, res, next) {
@@ -13,6 +13,6 @@ app.use(function(req, res, next) {
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use('/e', express.static('public'));
 
 module.exports = {app};
