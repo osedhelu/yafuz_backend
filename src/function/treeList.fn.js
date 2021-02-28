@@ -2,19 +2,19 @@
 
 let listToTree = ({data, idKey, parentKey,childrenKey}) => {
     
-    var ID_KEY = idKey || 'id';
-    var PARENT_KEY = parentKey || 'parent';
-    var CHILDREN_KEY = childrenKey || 'children';
-
-    // var item, id, parentId;
-    var map = {};
-    for (var i = 0; i < data.length; i++) { // make cache
+    let ID_KEY = idKey || 'id';
+    let PARENT_KEY = parentKey || 'parent';
+    let CHILDREN_KEY = childrenKey || 'children';
+  
+    // let item, id, parentId;
+    let map = {};
+    for (let i = 0; i < data.length; i++) { // make cache
         if (data[i][ID_KEY]) {
             map[data[i][ID_KEY]] = data[i];
             data[i][CHILDREN_KEY] = [];
         }
     }
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         if (data[i][PARENT_KEY]) { // is a child
             if (map[data[i][PARENT_KEY]]) // for dirty data
             {
@@ -26,9 +26,8 @@ let listToTree = ({data, idKey, parentKey,childrenKey}) => {
             }
         }
     };
-    console.log(data)
     return data;
-}
-
-
-module.exports = {listToTree};
+  }
+  
+  
+  module.exports = {listToTree};

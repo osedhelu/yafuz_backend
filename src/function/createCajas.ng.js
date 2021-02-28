@@ -1,8 +1,8 @@
-let createCajas = (id) => {
+let createCajas = () => {
 	let fecha = new Date()
 return [
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -16,7 +16,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -30,7 +30,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -44,7 +44,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -58,7 +58,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -72,7 +72,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -86,7 +86,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -100,7 +100,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -114,7 +114,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -128,7 +128,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -142,7 +142,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -156,7 +156,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -170,7 +170,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -184,7 +184,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -198,7 +198,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
@@ -212,7 +212,7 @@ return [
 }
 ,
 {
-    usuario : id,
+    // usuario : id,
     p1 : '0',
     p2 : '0',
     p3 : '0',
