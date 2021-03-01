@@ -106,7 +106,7 @@ let cargar16caja = async() => {
 // 
 // 
 // ____________________
-let CrearRamaAdmin = async (id) => {
+let CrearRamaAdmin = async (id, pais) => {
 	try {
 		let totalEmpresa = await SchemaPositon.find({ positionReferido: 'Empresa' })
 		if (totalEmpresa.length > 0) {
@@ -118,15 +118,15 @@ let CrearRamaAdmin = async (id) => {
 				usuario: id,
 			})
 			let position = new SchemaPositon({
-				usuario: id
+				usuario: id,
+				pais
 			});
 			let update = await userModel.findById({_id: id})
 			update.role = 'EMPRESA';
 			update.patrocinador = 'admin'
 			update.estado = true;
 			update.save();
-			await cargar16caja()
-			console.log(update);
+
 			 await derrame.save()
 			 await position.save()
 		}
@@ -135,7 +135,7 @@ let CrearRamaAdmin = async (id) => {
 	}
 }
 
-let UserNuevopositionandDerrame = async ({ id, item, itemPadre, nivel }) => {
+let UserNuevopositionandDerrame = async ({ id, item, itemPadre, nivel, pais }) => {
 	try {
 		let derrame = new Schemaderrame({
 			usuario: id,
@@ -144,7 +144,9 @@ let UserNuevopositionandDerrame = async ({ id, item, itemPadre, nivel }) => {
 			usuario: id,
 			position: item,
 			positionReferido: itemPadre,
-			nivel: nivel
+			nivel: nivel, 
+			pais: pais
+
 		});
 		let aa = await derrame.save()
 		let bb = await position.save()
@@ -222,7 +224,7 @@ let buscarDerrane = async (prefijo) => {
 // 	// console.log(nuevo);
 // 	return aa;
 // }
-let savePosition = async (_id, ss) => {
+let savePosition = async (_id, ss, pais) => {
 	try {
 		await SchemaPositon.remove()
 		await Schemaderrame.remove()
@@ -231,12 +233,12 @@ let savePosition = async (_id, ss) => {
 			let aa = await SchemaPositon.findOne({ 'positionReferido': 'Empresa' });
 			// console.log(aa);
 			if (aa) {
-				let enconrar = await buscarEspacios(aa, _id);
+				let enconrar = await buscarEspacios(aa, _id, pais);
 				// console.log("->>>01_si>>", _id, ss);
 				return enconrar;
 
 			} else {
-				let posicion = await CrearRamaAdmin(_id)
+				let posicion = await CrearRamaAdmin(_id, pais)
 				console.log(posicion);
 				
 				return 'es una empresa'
@@ -245,7 +247,7 @@ let savePosition = async (_id, ss) => {
 
 		} else {
 			let usuario = await SchemaPositon.findOne({usuario: ss})
-			let enconrar = await buscarEspacios(usuario, _id);
+			let enconrar = await buscarEspacios(usuario, _id, pais);
 			return enconrar;
 
 		}
@@ -257,7 +259,7 @@ let savePosition = async (_id, ss) => {
 	}
 }
 
-let buscarEspacios = async (aa, idNuevo) => {
+let buscarEspacios = async (aa, idNuevo, pais) => {
 	try {
 		let principal = {
 			hijo: '',
@@ -307,7 +309,8 @@ let buscarEspacios = async (aa, idNuevo) => {
 			id: idNuevo,
 			item: principal.hijo,
 			itemPadre: principal.padre,
-			nivel: principal.nivel
+			nivel: principal.nivel,
+			pais
 		}
 		// console.log("->>>>>01 final", re);
 		let zz = await UserNuevopositionandDerrame(re)

@@ -15,8 +15,9 @@ const router = new express.Router();
 
 router.get('/', async(req, res) => {
 	try {
-		let _sd = await SchemaPositon.find({})
-					.populate('usuario usuario.pais');
+				
+		 let _sd = await SchemaPositon.find({})
+					.populate('usuario pais');
 					let a = JSON.stringify(_sd)
 					let data = JSON.parse(a)
 					let nuevo = listToTree({data, idKey:'position', parentKey: 'positionReferido', childrenKey: 'relacion'})
@@ -31,7 +32,6 @@ router.post('/', (req, res) => {
 	let user = new Usuario({
 		nombre: nombre,
 		apellidos: apellidos,
-		pais: pais,
 		email: email,
 		celular: celular,
 		password: password,
@@ -39,13 +39,13 @@ router.post('/', (req, res) => {
 	});
 	(async () => {
 		try {
-			await Usuario.remove({email: 'osedhelu@gmail.com'})
-			// await Usuario.remove({})
+			// await Usuario.remove({email: 'osedhelu1@gmail.com'})
+			await Usuario.remove({})
 			user.password = await validate_pass(user.password, password_compare);
 			// _____________________________
 			let newUsuaro = await user.save();
 			// let token = jwt.sign({ id: newUsuaro._id }, env.SEED_TOKEN, { expiresIn: 50080 })
-			let aa = await savePosition(newUsuaro._id, newUsuaro.patrocinador);
+			let aa = await savePosition(newUsuaro._id, newUsuaro.patrocinador, pais);
 				
 					// sendEmail({ 	
 					// 	email: resp.email, 

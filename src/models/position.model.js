@@ -7,7 +7,8 @@ let position = new Schema ({
 	position: {type: String, default: 'YF_'},
 	positionReferido: {type:String, default: 'Empresa'},
 	usuario: {type: Schema.Types.ObjectId, ref: 'usuarios'},
-	nivel:{type:Number, default: 1} 
+	nivel:{type:Number, default: 1},
+	pais: { type: Schema.Types.ObjectId, ref: 'paises' }
 })
 
 

@@ -5,7 +5,9 @@ const socketIO = require('socket.io');
 const io = socketIO(serverHttp);
 io.on('connection', (socket) => {
   console.log('Conectado');
-  io.emit('new-message', "Conectado al Servidor");
+
+
+  socket.emit('new-message', "Conectado al Servidor");
 })
 
 module.exports = {serverHttp}

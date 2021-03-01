@@ -9,4 +9,4 @@ let saldo_btc = new schema({
 	,saldo_btc: {type : String, required: false}
 })
 
-module.exports = mongoose.model('saldo_btcs');
+module.exports = mongoose.model('saldo_btcs', saldo_btc);
