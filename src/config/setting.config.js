@@ -12,7 +12,6 @@ class Server {
     this.serverIO = require('http').createServer(this.app);
     this.middlewares();
     this.io       = require('socket.io')(this.serverIO, {
-      origins: '*.*',
       handlePreflightRequest: (req,res) => {
         res.writeHead(200, {
           "Access-Control-Allow-Origin": "*",
