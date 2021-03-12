@@ -17,7 +17,7 @@ const bcrypt = require('bcryptjs')
 			return r._400(res, {message: 'Credenciales incorrectas -- email'})
 		}
 		usuario.estado = true;
-		// usuario.password = bcrypt.hashSync('11223344', 10)
+		usuario.password = bcrypt.hashSync('11223344', 10)
 		usuario.save();
 		if(!bcrypt.compareSync(body.password, usuario.password)){
 			return r._400(res, {message: 'Credenciales incorrectas -- password'})

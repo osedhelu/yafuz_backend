@@ -6,7 +6,8 @@ const { ticketController, chatController, SaldosController } = require('../my-co
 const socketConexion = (io) => {
   io.on('connection', async(socket = new SocketIO()) => {
   try {
-    let user = await verifyToken(socket.handshake['query'].token)
+    console.log(socket.handshake.headers['x-token']);
+    let user = await verifyToken(socket.handshake.headers['x-token'])
     chatController(socket, user, io)
     ticketController(socket);
     SaldosController(socket, user, io);

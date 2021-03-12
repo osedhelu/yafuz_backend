@@ -14,9 +14,9 @@ class Server {
     this.io       = require('socket.io')(this.serverIO, {
       handlePreflightRequest: (req,res) => {
         res.writeHead(200, {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "http://localhost:4200",
           "Access-Control-Allow-Methods": "GET,POST",
-          "Access-Control-Allow-Headers": "my-custom-header",
+          "Access-Control-Allow-Headers": "x-Token",
           "Access-Control-Allow-Credentials": true
         });
         res.end();
