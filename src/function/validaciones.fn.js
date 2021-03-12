@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs');
 let validate_pass = (pass1, pass2) => {
 	return new Promise((resolve, reject) => {
 		if(pass1 === pass2){
+			console.log(pass1 === pass2);
 			resolve(bcryptjs.hashSync(pass1, 10))
 		}else {
 			reject({errors: { password: {message: 'El password es incorrecto'}}})

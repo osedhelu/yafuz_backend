@@ -1,18 +1,24 @@
 const express = require("express");
 const { r } = require('../config/config');
 const { query } = require('../db/consultar.db');
-const paisesSchema = require('../models/paises.model');
+const shemaPaises = require('../models/paises.model');
+const {Paisjson} = require('../db/paises')
 
 
 const router = new express.Router();
 
-router.get('/', (req, res) => {
-	paisesSchema.find({}).exec((err, resp) => {
-		if(err) {
-			return r._500(res, {message: 'No se encontraro los paises'})
-		}
-		return r._200(res, resp);
-	})
+router.get('/', async(req, res) => {
+	try {
+        let aa = await shemaPaises.find({});
+        if(aa.length === 0){
+            let save = await shemaPaises.create(Paisjson);
+            return r._200(res, save)
+        }else{
+            return r._200(res, aa)
+        }        
+    } catch (err) {
+        r._400(res, err)
+    }
 })
 router.get('/:iso', (req, res) => {
 	let iso = req.params.iso;

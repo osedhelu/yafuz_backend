@@ -2,7 +2,7 @@ let {app} = require('./setting.config');
   
 
 
-// const example = require('../Routers/example.router');
+const example = require('../Routers/example.router');
 const login = require('../Routers/login.router');
 const user = require('../Routers/users.router');
 const paises = require('../Routers/paises.router');
@@ -12,6 +12,7 @@ const activate = require('../Routers/activate.router');
 
 const referidos = require('../Routers/referidos.router');
 const socket = require('../Routers/socket.router');
+const billetera= require('../Routers/billetera.router');
 
 
 
@@ -27,6 +28,7 @@ app.use('/e/activate', activate);
 app.use('/e/activate', referidos);
 app.use('/e/referidos', referidos);
 app.use('/e/socket', socket)
+app.use('/e/billetera', billetera)
 
 
 

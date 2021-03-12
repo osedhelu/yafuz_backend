@@ -11,33 +11,17 @@ var rolesValidos = {
 let hecha = new Date();
 
 var usuarioSchema = new Schema({
-
     nombre: { type: String, required: [true, 'El nombre es necesario'] },
     apellidos: { type: String, required: [true, 'El nombre es necesario'] },
-	pais: {
-        type: Schema.Types.ObjectId, ref: 'paises' 
-    },
     email: { type: String, unique: true, required: [true, 'El correo es necesario'] },
     celular: { type: String, required: [true, 'El nombre es necesario'] },
     password: { type: String, required: [true, 'La contraseña es necesaria'] }, 
-    patrocinador: { type: String, required: false },
-    billetera: { type: String, required: false },
     role: { type: String, required: true, default: 'USUARIO', enum: rolesValidos },
-    estadojuego: { type: String, required: true,  default: '1' },
-    estado: { type: Boolean, required: true, default: false },
-    empresa: { type: String, required: true, default: '1'  },
-    subid: { type: String, required: true, default: '0'  },
-    fechayhora: { type: Date, required: false },
-    fecha: { type: Date, required: true, default: hecha },
-    activado: { type: String, required: true, default: '0' },
-    sfs: { type: String, required: true, default: '0' }
-    // email: ,
-    // password: ,
-    // img: { type: String, required: false },
-    // role: { type: String, required: true, default: 'USER_ROLE', enum: rolesValidos }
-
+    estado: { type: Boolean, required: false, default: false },
+    patrocinador: {type: String},
 });
+
 
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('usuarios', usuarioSchema);
