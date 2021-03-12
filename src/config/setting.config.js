@@ -10,7 +10,9 @@ class Server {
     this.app      = express();
     this.port     = env.PORT;
     this.serverIO = require('http').createServer(this.app);
-    this.io       = require('socket.io')(this.serverIO);
+    this.io       = require('socket.io')(this.serverIO, {
+      origins: '*:*'
+    });
     socketConexion(this.io)
     this.conexionDB();
     this.middlewares();
