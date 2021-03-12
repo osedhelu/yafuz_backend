@@ -12,12 +12,11 @@ const TrasferenciaSchemas = new Schema({
         ref: 'usuarios',
         required: [true, 'debe asociar un usuario a este registro']
     },
-    cantidad: { type: Number, required: true },
-    btc: { type: Date, required: true },
-    rate: { type: String, required: true },
-    fechayhora: { type: Date, required: true },
-    fecha: { type: Date, required: true },
+    cantidad: { type: Number, required: false },
+    btc: { type: String, required: false },
+    rate: { type: String, required: false },
+    fechayhora: { type: Date, default: new Date() },
 });
 
 
-module.exports = mongoose.model('transferencias', TrasferenciaSchemas);
+module.exports = mongoose.model('transacciones', TrasferenciaSchemas);

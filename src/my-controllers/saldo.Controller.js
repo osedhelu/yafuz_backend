@@ -5,21 +5,22 @@ let SaldosController = async (socket, user, io) => {
 	let model = new SaldosModels(user._id)
 
 	socket.emit('getSaldos', await model.saldo())
-	socket.on('realizarPago', async({id, valor}, callback) => {
+	socket.on('realizarPago', async({id, valor, message = 'recarga'}, callback) => {
 		try {
-			let resp = await model.transferrirSaldo(id,valor, 'recarga');
+			let resp = await model.transferrirSaldo(id,valor, message);
 			if(resp) {
 				socket.emit('getSaldos', await model.saldo())
-				console.log(await model.saldo());
+				console.log(resp);
 				callback(resp)
 			}
 		} catch (err) {
-			callback(err)
+			console.log(err);
+			callback('algo salio  mal')
 		}
 	})
 
 
-	socket.emit('getTransaccionAll',)
+	socket.emit('getTransaccionAll', await model.getTransion())
 }
 
 module.exports = {SaldosController}
