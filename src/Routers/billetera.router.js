@@ -1,6 +1,6 @@
 const express = require("express");
 const { r } = require('../config/config');
-const schemaSaldo = require('../models/btc_saldo.model');
+const schemaSaldo = require('../models/transferencias.model');
 var Usuario = require('../models/usuarios.model');
 const router = new express.Router();
 

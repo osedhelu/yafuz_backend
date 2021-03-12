@@ -10,7 +10,7 @@ const { usuariosCajas, savePosition } = require('../function/user.fn');
 const { env } = require('../../env.js');
 let { listToTree } = require('../function/treeList.fn')
 let SchemaPositon = require('../models/position.model');
-
+const Schemaderrame = require('../models/derrame.model');
 const router = new express.Router();
 
 router.get('/', async(req, res) => {
@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
 	(async () => {
 		try {
 			// await Usuario.remove({email: 'osedhelu1@gmail.com'})
-			await Usuario.remove({})
+			// await Usuario.remove({})
 			user.password = await validate_pass(user.password, password_compare);
 			// _____________________________
 			let newUsuaro = await user.save();
@@ -113,6 +113,19 @@ router.get('/:action', (req, res) => {
 				}
 				return r._200(res, usuarios)
 			})
+})
+router.delete('/:id', async(req, res) => {
+	let params = req.params.id;
+	try {
+		let exec = await Usuario.remove({_id: params})
+		let aa = await SchemaPositon.remove({usuario: params})
+		let bb = await Schemaderrame.remove({usuario: params})
+
+		return r._200(res, {message: 'usuario Eliminado',position: aa, derame: bb})
+	} catch (err) {
+		return r._400(res, {message: 'hay un error', err})
+		
+	}
 })
 
 module.exports = router;

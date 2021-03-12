@@ -4,7 +4,6 @@ var CajasSshema = require('../models/cajas.model');
 const { usuariosCajas } = require('../function/user.fn');
 const SchemaPositon = require('../models/position.model');
 const {createCajas} = require('../function/createCajas.ng')
-const { verifyToken } = require('../middleware/authorizer.js');
 
 // const XMLWriter = require("xml-writer");
 

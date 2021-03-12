@@ -1,35 +1,16 @@
-let {app} = require('./setting.config');
-  
+const urlRouter = (app) => {	
+app.use('/e/example', require('../Routers/example.router'));
+app.use('/e/login', require('../Routers/login.router'));
+app.use('/e/user', require('../Routers/users.router'));
+app.use('/e/paises', require('../Routers/paises.router'));
+app.use('/e/email', require('../Routers/send-email'));
+app.use('/e/cajas', require('../Routers/cajas.router'));
+app.use('/e/activate',  require('../Routers/activate.router'));
+// app.use('/e/activate', referidos);
+app.use('/e/referidos', require('../Routers/referidos.router'));
+app.use('/e/socket', require('../Routers/socket.router'))
+app.use('/e/billetera',  require('../Routers/billetera.router'))
 
+} 
 
-const example = require('../Routers/example.router');
-const login = require('../Routers/login.router');
-const user = require('../Routers/users.router');
-const paises = require('../Routers/paises.router');
-const cajas = require('../Routers/cajas.router');
-const email = require('../Routers/send-email');
-const activate = require('../Routers/activate.router');
-
-const referidos = require('../Routers/referidos.router');
-const socket = require('../Routers/socket.router');
-const billetera= require('../Routers/billetera.router');
-
-
-
-	 
-
-app.use('/e/example', example);
-app.use('/e/login', login);
-app.use('/e/user', user);
-app.use('/e/paises', paises);
-app.use('/e/email', email);
-app.use('/e/cajas', cajas);
-app.use('/e/activate', activate);
-app.use('/e/activate', referidos);
-app.use('/e/referidos', referidos);
-app.use('/e/socket', socket)
-app.use('/e/billetera', billetera)
-
-
-
-module.exports = {app};
+module.exports = {urlRouter}

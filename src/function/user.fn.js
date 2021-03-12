@@ -1,5 +1,4 @@
 const userModel = require('../models/usuarios.model');
-const { verifyToken } = require('./validateToken.fn');
 const { createCajas } = require('./createCajas.ng');
 const SchemaCajas = require('../models/cajas.model');
 const SchemaPositon = require('../models/position.model');
@@ -226,8 +225,8 @@ let buscarDerrane = async (prefijo) => {
 // }
 let savePosition = async (_id, ss, pais) => {
 	try {
-		await SchemaPositon.remove()
-		await Schemaderrame.remove()
+		// await SchemaPositon.remove()
+		// await Schemaderrame.remove()
 		// console.log(_id,'->>>>', ss);
 		if (ss == 'nuevo') {
 			let aa = await SchemaPositon.findOne({ 'positionReferido': 'Empresa' });
