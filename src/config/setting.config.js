@@ -10,10 +10,21 @@ class Server {
     this.app      = express();
     this.port     = env.PORT;
     this.serverIO = require('http').createServer(this.app);
-    this.io       = require('socket.io')(this.serverIO);
+    this.middlewares();
+    this.io       = require('socket.io')(this.serverIO, {
+      origins: '*.*',
+      handlePreflightRequest: (req,res) => {
+        res.writeHead(200, {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,POST",
+          "Access-Control-Allow-Headers": "my-custom-header",
+          "Access-Control-Allow-Credentials": true
+        });
+        res.end();
+      }
+    });
     socketConexion(this.io)
     this.conexionDB();
-    this.middlewares();
     urlRouter(this.app)
   }
   async conexionDB() {
