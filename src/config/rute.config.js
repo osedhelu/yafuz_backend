@@ -17,7 +17,7 @@ const socket = require('../Routers/socket.router');
 
 	 
 
-app.use('/e/example', example);
+// app.use('/e/example', example);
 app.use('/e/login', login);
 app.use('/e/user', user);
 app.use('/e/paises', paises);
